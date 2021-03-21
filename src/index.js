@@ -3,11 +3,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux'
+import { combineReducers } from 'redux';
+import GameReducer from './Reducers/reducer-games';
+import ActiveGameFilterReducer from './Reducers/reducer-filter-active';
+import GameSearch from './Reducers/reducer-search-game'
+
+const allReducers = combineReducers({
+  games: GameReducer,
+  activeGameFilter: ActiveGameFilterReducer,
+  gameSearch: GameSearch
+})
+
+const store = createStore(allReducers);
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
